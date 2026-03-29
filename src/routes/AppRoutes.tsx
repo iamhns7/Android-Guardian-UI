@@ -15,8 +15,9 @@ export default function AppRoutes() {
         <Route path="/register" element={<Register />} />
         
         {/* Ana sayfa - Dashboard */}
-        <Route path="/main" element={<Navigate to="/guardian-ai" replace />} />
-        <Route path="/guardian-ai" element={<GuardianAI />} />
+        <Route path="/main" element={<Navigate to="/guardian-ai/new-scan" replace />} />
+        <Route path="/guardian-ai" element={<Navigate to="/guardian-ai/new-scan" replace />} />
+        <Route path="/guardian-ai/:tab" element={<GuardianAI />} />
       </Routes>
     </BrowserRouter>
   );

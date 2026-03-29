@@ -15,9 +15,10 @@ export default function Register() {
       return;
     }
     
-    // Kullanıcı verisini LocalStorage'a kaydetme
-    localStorage.setItem('user', JSON.stringify({ username, password }));
+    // Kullanıcı verisini LocalStorage'a kaydetme (Kalıtımlı Kayıt)
+    localStorage.setItem('registeredUser', JSON.stringify({ username, password }));
     
+    // Aynı zamanda giriş yapmış sayalım (isteğe bağlı ama auth'a yönlendiriyoruz)
     alert('Kayıt başarıyla oluşturuldu! Şimdi giriş yapabilirsiniz.');
     navigate('/auth'); // Başarılı kayıt sonrası Login sayfasına yönlendir
   };

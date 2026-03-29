@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   ScanSearch,
   History,
@@ -30,15 +30,19 @@ import {
 
 export default function GuardianAI() {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState("reports");
+  const { tab } = useParams();
+  const activeTab = tab || "new-scan";
+  
   const [activeSettingTab, setActiveSettingTab] = useState("general");
   const [isScanning, setIsScanning] = useState(false);
 
-  const userStr = localStorage.getItem("user");
+  // Sadece aktif oturum bilgisini (currentUser) kullanıyoruz
+  const userStr = localStorage.getItem("currentUser");
   const currentUser = userStr ? JSON.parse(userStr) : { username: "Kullanıcı" };
 
   const handleLogout = () => {
-    localStorage.removeItem("user");
+    // Sadece aktif oturumu kapat, "registeredUser" verisini SİLME
+    localStorage.removeItem("currentUser");
     navigate("/auth");
   };
 
@@ -81,7 +85,7 @@ export default function GuardianAI() {
               return (
                 <button
                   key={item.id}
-                  onClick={() => setActiveTab(item.id)}
+                  onClick={() => navigate(`/guardian-ai/${item.id}`)}
                   className={`group relative flex items-center gap-3 px-4 py-3.5 rounded-xl text-[14px] font-bold transition-all duration-300 ${
                     isActive
                       ? "bg-gradient-to-r from-blue-500/10 to-transparent text-blue-400 border border-blue-500/20"
@@ -466,7 +470,7 @@ export default function GuardianAI() {
               {/* Bottom Button matching the image */}
               <div className="mt-auto p-4 bg-[#1A1D24] shadow-[0_-10px_20px_rgba(0,0,0,0.1)] relative z-10 mx-2 mb-2">
                 <button
-                  onClick={() => setActiveTab("new-scan")}
+                  onClick={() => navigate("/guardian-ai/new-scan")}
                   className="w-full bg-[#407DE7] hover:bg-[#3267CC] text-white font-semibold py-3 rounded-lg flex items-center justify-center gap-2 transition-all shadow-md active:scale-[0.99] tracking-wide text-sm"
                 >
                   <FileBox className="h-4 w-4" strokeWidth={2} />
