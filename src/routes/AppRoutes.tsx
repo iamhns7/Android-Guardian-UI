@@ -1,8 +1,7 @@
-import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Auth from '../pages/auth/Auth';
 import Register from '../pages/auth/Register';
-import Main from '../pages/main/Main';
+import GuardianAI from '../pages/guardian-ai/GuardianAI';
 
 export default function AppRoutes() {
   return (
@@ -16,7 +15,8 @@ export default function AppRoutes() {
         <Route path="/register" element={<Register />} />
         
         {/* Ana sayfa - Dashboard */}
-        <Route path="/main" element={<Main />} />
+        <Route path="/main" element={<Navigate to="/guardian-ai" replace />} />
+        <Route path="/guardian-ai" element={<GuardianAI />} />
       </Routes>
     </BrowserRouter>
   );

@@ -16,9 +16,9 @@ export default function Auth() {
     if (storedUserStr) {
       const storedUser = JSON.parse(storedUserStr);
       
-      // Bilgiler eşleşiyorsa main sayfasına yolla
+      // Bilgiler eşleşiyorsa guardian-ai sayfasına yolla
       if (storedUser.username === username && storedUser.password === password) {
-        navigate('/main');
+        navigate('/guardian-ai');
       } else {
         alert('Hatalı kullanıcı adı veya şifre!');
       }
