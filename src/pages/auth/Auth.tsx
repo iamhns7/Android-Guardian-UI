@@ -10,20 +10,16 @@ export default function Auth() {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // LocalStorage'dan kayıtlı kullanıcıyı çekiyoruz
-    const storedUserStr = localStorage.getItem('user');
-    
-    if (storedUserStr) {
-      const storedUser = JSON.parse(storedUserStr);
+    if (username.trim() && password.trim()) {
+      // Login olan kullanıcıyı direkt sisteme kaydediyoruz (UI testleri için)
+      localStorage.setItem('user', JSON.stringify({
+        username: username,
+        password: password,
+      }));
       
-      // Bilgiler eşleşiyorsa guardian-ai sayfasına yolla
-      if (storedUser.username === username && storedUser.password === password) {
-        navigate('/guardian-ai');
-      } else {
-        alert('Hatalı kullanıcı adı veya şifre!');
-      }
+      navigate('/guardian-ai');
     } else {
-      alert('Sistemde kayıtlı kullanıcı bulunamadı. Lütfen önce kayıt olun.');
+      alert('Lütfen geçerli bir kullanıcı adı ve şifre giriniz.');
     }
   };
 
